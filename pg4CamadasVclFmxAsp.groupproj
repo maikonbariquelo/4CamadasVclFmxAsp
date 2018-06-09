@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{299D6E4D-07E0-465E-B9C7-22A6F4CC6FC0}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ServidorVCL\prjServidorVCL.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ClienteFMX\prjClienteFMX.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="prjServidorVCL">
+        <MSBuild Projects="ServidorVCL\prjServidorVCL.dproj"/>
+    </Target>
+    <Target Name="prjServidorVCL:Clean">
+        <MSBuild Projects="ServidorVCL\prjServidorVCL.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="prjServidorVCL:Make">
+        <MSBuild Projects="ServidorVCL\prjServidorVCL.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="prjClienteFMX">
+        <MSBuild Projects="ClienteFMX\prjClienteFMX.dproj"/>
+    </Target>
+    <Target Name="prjClienteFMX:Clean">
+        <MSBuild Projects="ClienteFMX\prjClienteFMX.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="prjClienteFMX:Make">
+        <MSBuild Projects="ClienteFMX\prjClienteFMX.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="prjServidorVCL;prjClienteFMX"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="prjServidorVCL:Clean;prjClienteFMX:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="prjServidorVCL:Make;prjClienteFMX:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
